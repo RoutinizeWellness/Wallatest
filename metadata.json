@@ -1,0 +1,9 @@
+{
+  "name": "TerrassaMarket",
+  "description": "El marketplace local de Terrassa anti-estafas. Compra y vende en tu barrio con seguridad.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
