@@ -1,30 +1,49 @@
+import { Id } from "./convex/_generated/dataModel";
+
 export interface User {
-  id: string;
+  _id: string;
   name: string;
-  email: string;
-  avatar: string;
-  rating: number;
-  reviewCount: number;
-  location: string; // Siempre "Terrassa"
-  joinDate: number;
-  verified: boolean; // MVP Feature
+  email?: string;
+  avatar?: string;
+  rating?: number;
+  reviewCount?: number;
+  location?: string;
+  isVerified?: boolean;
 }
 
-export interface Review {
-  id: string;
-  reviewerId: string;
-  reviewerName: string;
-  reviewerAvatar: string;
-  targetUserId: string;
-  rating: number; // 1-5
-  comment: string;
+export interface Listing {
+  _id: string; // Convex ID
+  sellerId: string;
+  sellerName: string;
+  sellerAvatar: string;
+  sellerVerified: boolean;
+  title: string;
+  description: string;
+  price: number;
+  category: string;
+  neighborhood?: string; // Mapped from location.name
+  images: string[];
+  status: string;
   createdAt: number;
+  views?: number;
+  favorites?: number;
+  location?: {
+    lat: number;
+    lng: number;
+    name: string;
+  };
 }
 
 export enum ListingStatus {
   ACTIVE = 'active',
   RESERVED = 'reserved',
   SOLD = 'sold',
+}
+
+export enum Category {
+  HOGAR = "Hogar",
+  NINOS = "Niños y Bebés",
+  ELECTRONICA = "Electrónica"
 }
 
 export enum Neighborhood {
@@ -36,51 +55,4 @@ export enum Neighborhood {
   CAN_PARELLADA = "Can Parellada",
   CAN_JOFRESA = "Can Jofresa",
   ROC_BLANC = "Roc Blanc"
-}
-
-export enum Category {
-  HOGAR = "Hogar",
-  NINOS = "Niños y Bebés",
-  ELECTRONICA = "Electrónica"
-}
-
-export interface Listing {
-  id: string;
-  sellerId: string;
-  sellerName: string;
-  sellerAvatar: string;
-  sellerVerified: boolean;
-  title: string;
-  description: string;
-  price: number;
-  currency: string;
-  category: Category | string;
-  neighborhood: Neighborhood | string;
-  images: string[];
-  status: ListingStatus;
-  createdAt: number;
-  likes: number;
-}
-
-export interface Message {
-  id: string;
-  chatId: string;
-  senderId: string;
-  content: string;
-  timestamp: number;
-  hasSensitiveData?: boolean; // Flag de seguridad
-  isSystemWarning?: boolean;
-}
-
-export interface ChatSession {
-  id: string;
-  listingId: string;
-  listingTitle: string;
-  listingImage: string;
-  otherUserId: string;
-  otherUserName: string;
-  otherUserAvatar: string;
-  lastMessage: string;
-  lastMessageAt: number;
-  hasSafetyWarning: boolean;
 }
